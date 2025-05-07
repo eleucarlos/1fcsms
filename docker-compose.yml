@@ -7,7 +7,7 @@ services:
     #
     # TODO: Get database migrations to work with the latest point releases of
     # MariaDB 10.4.
-    image: mariadb:10.4.30
+    image: mariadb:latest
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
