@@ -9,7 +9,7 @@ services:
     # MariaDB 10.4.
     image: mariadb:latest
     networks:
-      - internal_net
+      - external_net
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -35,5 +35,5 @@ volumes:
     external: true
 
 networks:
-  internal_net:
+  external_net:
     external: true
