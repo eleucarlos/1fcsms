@@ -38,4 +38,3 @@ volumes:
 networks:
   internal_net:
     external: true
-    name: internal_net
