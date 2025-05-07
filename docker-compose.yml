@@ -11,10 +11,11 @@ services:
     networks:
       - external_net
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      - MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password_secret 
+      #- MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
+      - MYSQL_DATABASE: ${MYSQL_DATABASE}
+      - MYSQL_USER: ${MYSQL_USER}
+      - MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     #ports:
     #  - 3306:3306
     volumes:
@@ -36,4 +37,8 @@ volumes:
 
 networks:
   external_net:
+    external: true
+
+secrets:
+  mariadb_password_secret:
     external: true
