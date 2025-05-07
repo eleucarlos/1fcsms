@@ -1,9 +1,4 @@
 version: "3.0"
-
-volumes:
-  db-data:
-    external: false
-
 services:
 
   db:
@@ -13,24 +8,32 @@ services:
     # TODO: Get database migrations to work with the latest point releases of
     # MariaDB 10.4.
     image: mariadb:10.4.30
-    restart: unless-stopped
-    ports:
-      - 3306:3306
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_DATABASE: stevedb
-      MYSQL_USER: steve
-      MYSQL_PASSWORD: changeme
-  app:
-    restart: unless-stopped
-    build: .
-    links:
-      - "db:mariadb"
+      MYSQL_RANDOM_ROOT_PASSWORD: ${MYSQL_RANDOM_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    #ports:
+    #  - 3306:3306
     volumes:
-      - .:/code
-    ports:
-      - "8180:8180"
-      - "8443:8443"
-    depends_on:
-      - db
+      - mariadb_data:/var/lib/mysql
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
     
+volumes:
+  mariadb_data:
+    external: true
+    name: mariadb_data
+
+networks:
+  internal_net:
+    external: true
+    name: internal_net
