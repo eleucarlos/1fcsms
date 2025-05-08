@@ -1,3 +1,9 @@
+FROM maven:3.9-eclipse-temurin-17 AS builder
+
+WORKDIR /build
+COPY . /build
+RUN mvn clean package -Pdocker -Djdk.tls.client.protocols="TLSv1,TLSv1.1,TLSv1.2"
+
 FROM eclipse-temurin:17-jre
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
@@ -10,8 +16,8 @@ EXPOSE 8180
 EXPOSE 8443
 WORKDIR /app
 
-# Copy the pre-built jar
-COPY target/steve.jar /app/
+# Copy the built jar from builder
+COPY --from=builder /build/target/steve.jar /app/
 
 # Wait for the db to startup(via dockerize), then run steve
 CMD dockerize -wait tcp://mariadb:3306 -timeout 60s && \
