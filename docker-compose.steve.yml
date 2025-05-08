@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   steve:
-    image: steve:latest
+    image: eleucarlos/steve:latest
     networks:
       - external_net
     environment:
