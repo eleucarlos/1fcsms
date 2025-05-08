@@ -68,8 +68,6 @@ services:
         - traefik.http.services.steve_https.loadbalancer.server.port=8443
         - traefik.http.services.steve_https.loadbalancer.passHostHeader=true
         - traefik.http.routers.steve_https.service=steve_https
-    secrets:
-      - mariadb_password_secret
 
 volumes:
   mariadb_data:
