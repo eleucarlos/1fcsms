@@ -46,9 +46,12 @@
         <jackson.version>2.18.3</jackson.version>
         <slf4j.version>2.0.17</slf4j.version>
         <plugin.license-maven.version>4.6</plugin.license-maven.version>
-
-        <!-- In Mysql: schema == database (http://dev.mysql.com/doc/refman/5.6/en/glossary.html#glos_schema) -->
-        <jdbcUrl>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</jdbcUrl>
+        
+        <!-- Database properties -->
+        <db.schema>1fcsms</db.schema>
+        <db.user>1fsteve</db.user>
+        <db.password>C0l0r4d010</db.password>
+        <jdbc.url>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</jdbc.url>
     </properties>
 
     <profiles>
@@ -360,7 +363,7 @@
 
                     <cleanDisabled>true</cleanDisabled>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <url>${jdbcUrl}</url>
+                    <url>${jdbc.url}</url>
                     <user>${db.user}</user>
                     <password>${db.password}</password>
                     <schemas>
@@ -412,21 +415,26 @@
                         <artifactId>mysql-connector-j</artifactId>
                         <version>${mysql.jdbc.version}</version>
                     </dependency>
+                    <dependency>
+                        <groupId>com.h2database</groupId>
+                        <artifactId>h2</artifactId>
+                        <version>2.2.224</version>
+                    </dependency>
                 </dependencies>
 
                 <!-- http://www.jooq.org/doc/3.5/manual/code-generation/codegen-configuration/
                      http://www.jooq.org/doc/3.5/manual/code-generation/codegen-advanced/ -->
                 <configuration>
                     <jdbc>
-                        <driver>com.mysql.cj.jdbc.Driver</driver>
-                        <url>${jdbcUrl}</url>
+                        <driver>org.h2.Driver</driver>
+                        <url>${jdbc.url}</url>
                         <user>${db.user}</user>
                         <password>${db.password}</password>
                     </jdbc>
 
                     <generator>
                         <database>
-                            <name>org.jooq.meta.mysql.MySQLDatabase</name>
+                            <name>org.jooq.meta.h2.H2Database</name>
                             <includes>.*</includes>
                             <excludes/>
                             <inputSchema>${db.schema}</inputSchema>
