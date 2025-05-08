@@ -37,9 +37,9 @@ services:
     environment:
       - db.ip=db
       - db.port=3306
-      - db.schema=1fcsms
-      - db.user=1fsteve
-      - db.password=changeme
+      - db.schema=${MYSQL_DATABASE}
+      - db.user=${MYSQL_USER}
+      - db.password=${MYSQL_PASSWORD}
       - STEVE_BROWSER_REDIRECT_URL=${STEVE_BROWSER_REDIRECT_URL}
       - STEVE_SERVER_URL=${STEVE_SERVER_URL}
       - STEVE_API_DOMAIN=${STEVE_API_DOMAIN}

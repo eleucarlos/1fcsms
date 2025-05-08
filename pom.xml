@@ -363,7 +363,7 @@
 
                     <cleanDisabled>true</cleanDisabled>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <url>${jdbc.url}</url>
+                    <url>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</url>
                     <user>${db.user}</user>
                     <password>${db.password}</password>
                     <schemas>
