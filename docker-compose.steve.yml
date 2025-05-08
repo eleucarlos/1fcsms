@@ -1,7 +1,7 @@
 version: "3.0"
 services:
   steve:
-    build: .
+    image: steve:latest
     networks:
       - external_net
     environment:
@@ -13,7 +13,7 @@ services:
       - db.port=3306
       - db.schema=${MYSQL_DATABASE}
       - db.user=${MYSQL_USER}
-      - MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password_secret
+      - db.password=${MYSQL_PASSWORD}
     volumes:
       - steve_data:/code
     deploy:
