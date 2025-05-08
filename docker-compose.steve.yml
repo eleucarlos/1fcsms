@@ -14,8 +14,6 @@ services:
       - db.schema=${MYSQL_DATABASE}
       - db.user=${MYSQL_USER}
       - db.password=${MYSQL_PASSWORD}
-    volumes:
-      - steve_data:/code
     deploy:
       mode: replicated
       replicas: 1
@@ -40,10 +38,6 @@ services:
         - traefik.http.services.steve_https.loadbalancer.server.port=8443
         - traefik.http.services.steve_https.loadbalancer.passHostHeader=true
         - traefik.http.routers.steve_https.service=steve_https
-
-volumes:
-  steve_data:
-    external: true
 
 networks:
   external_net:
