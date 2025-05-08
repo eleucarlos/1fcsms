@@ -10,7 +10,6 @@ services:
       - MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password_secret
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     deploy:
       mode: replicated
       replicas: 1
