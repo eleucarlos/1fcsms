@@ -2,8 +2,6 @@ version: "3.0"
 services:
   mariadb:
     image: mariadb:latest
-    secrets:
-      - mariadb_password_secret
     networks:
       - external_net
     volumes:
@@ -30,8 +28,4 @@ volumes:
 
 networks:
   external_net:
-    external: true
-
-secrets:
-  mariadb_password_secret:
     external: true
