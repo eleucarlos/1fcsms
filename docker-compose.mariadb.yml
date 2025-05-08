@@ -1,0 +1,37 @@
+version: "3.0"
+services:
+  mariadb:
+    image: mariadb:latest
+    secrets:
+      - mariadb_password_secret
+    networks:
+      - external_net
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    environment:
+      - MARIADB_PASSWORD_FILE=/run/secrets/mariadb_password_secret
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 1024M
+
+volumes:
+  mariadb_data:
+    external: true
+
+networks:
+  external_net:
+    external: true
+
+secrets:
+  mariadb_password_secret:
+    external: true
