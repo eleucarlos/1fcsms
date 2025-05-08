@@ -30,19 +30,6 @@ VOLUME ["/code"]
 # Copy the application's code
 COPY . /code
 
-# Comandos de debug
-RUN echo "Verificando instalação do Maven:" && \
-    which mvn && \
-    mvn --version && \
-    echo "Verificando PATH:" && \
-    echo $PATH && \
-    echo "Verificando diretório atual:" && \
-    pwd && \
-    echo "Listando arquivos do diretório:" && \
-    ls -la && \
-    echo "Verificando permissões do mvnw:" && \
-    ls -l mvnw || echo "mvnw não encontrado"
-
 # Wait for the db to startup(via dockerize), then 
 # Build and run steve, requires a db to be available on port 3306
 CMD ["sh", "-c", "dockerize -wait tcp://mariadb:3306 -timeout 60s && mvn clean package -Pdocker -DskipTests -Dmaven.javadoc.skip=true -Djdk.tls.client.protocols=\"TLSv1,TLSv1.1,TLSv1.2\" && java -XX:MaxRAMPercentage=85 -jar target/steve.jar"]

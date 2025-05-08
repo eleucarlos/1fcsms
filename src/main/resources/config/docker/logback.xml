@@ -36,5 +36,12 @@
     <logger name="org.apache.jasper" level="WARN"/>
     <logger name="org.apache.tomcat.util" level="WARN"/>
     <logger name="jndi" level="WARN"/>
+    <logger name="org.flywaydb" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.security" level="INFO"/>
+    <logger name="org.springframework.web.servlet" level="INFO"/>
+    <logger name="org.apache.cxf" level="INFO"/>
+    <logger name="org.eclipse.jetty" level="INFO"/>
 
 </configuration>
