@@ -48,8 +48,8 @@
         <plugin.license-maven.version>4.6</plugin.license-maven.version>
         
         <!-- Database properties -->
-        <db.schema>1fcsms</db.schema>
-        <db.user>1fsteve</db.user>
+        <db.schema>stevedb</db.schema>
+        <db.user>steve</db.user>
         <db.password>C0l0r4d010</db.password>
         <jdbc.url>jdbc:mysql://${db.ip}:${db.port}/${db.schema}?useSSL=true&amp;serverTimezone=UTC</jdbc.url>
     </properties>
